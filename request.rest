@@ -1,0 +1,29 @@
+POST http://localhost:3000/user/
+Content-Type: application/json
+
+{
+  "login" : "marianek23",
+  "password" : "marianek23",
+  "email" : "email@gamil.com"
+}
+###
+POST http://localhost:3000/user/info
+Content-Type: application/json
+
+{
+  "_id" : "610a7baf6e8f5e3184fc0377",
+  "weight" : "72",
+  "age" : "34",
+  "height": "178",
+  "friends" : [{
+    "_id" : "610a7baf6e8f5e3184fc0379", 
+    "login" : "Leon"}]
+}
+
+# {
+#   "_id" : "610a7baf6e8f5e3184fc0377",
+#   "weight" : 72,
+#   "age" : 34,
+#   "height": 175
+#   /*"friends" : [{}, "dzvuh83"]*/
+# }

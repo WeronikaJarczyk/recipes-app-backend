@@ -8,6 +8,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.json());
 
+// import routes
+const userRoute = require('../routes/user');
+
+app.use('/user', userRoute);
+
 const PORT = process.env.PORT || 3001;
 
 //connect to DB
