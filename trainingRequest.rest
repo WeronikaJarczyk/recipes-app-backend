@@ -1,0 +1,12 @@
+###
+POST http://localhost:3000/training/add
+Content-Type: application/json
+
+{
+  "name" : "short run",
+  "burntCalories" : "130",
+  "duration" : "0.5",
+  "unit" : "h"
+}
+
+# request needs to have unit property: min/h
