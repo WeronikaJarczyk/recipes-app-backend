@@ -93,4 +93,18 @@ router.post('/info/calories', async (req, res) => {
   }
 });
 
+router.get('/info/get', async function (req, res) {
+  try {
+    const { _id } = req.body;
+    const user = await UserInfo.findOne({ _id });
+
+    if (user) {
+      res.status(200).json({ message: user });
+    } else throw Error('User does not exist');
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ userInfo: err.message });
+  }
+})
+
 module.exports = router;

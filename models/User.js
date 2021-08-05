@@ -23,4 +23,3 @@ module.exports = mongoose.model('User', UserSchema);
 // Password
 // Email -> potwierdzenie
 // UserId-> w bazie
-// Friends-> Ids + Login

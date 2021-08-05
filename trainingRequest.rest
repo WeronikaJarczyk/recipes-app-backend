@@ -3,10 +3,31 @@ POST http://localhost:3000/training/add
 Content-Type: application/json
 
 {
-  "name" : "short run",
+  "name" : "climbing",
   "burntCalories" : "130",
   "duration" : "0.5",
   "unit" : "h"
 }
 
+###
+#with id of user-> training manually added
+POST http://localhost:3000/training/add
+Content-Type: application/json
+
+{
+  "name" : "swimming",
+  "burntCalories" : "130",
+  "duration" : "0.5",
+  "unit" : "h",
+  "userId": "610a7baf6e8f5e3184fc0399"
+}
+
 # request needs to have unit property: min/h
+
+###
+GET http://localhost:3000/training/get
+Content-Type: application/json
+
+{
+  "userId" : "610a7baf6e8f5e3184fc0399"
+}

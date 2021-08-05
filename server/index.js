@@ -10,8 +10,10 @@ app.use(express.json());
 
 // import routes
 const userRoute = require('../routes/user');
+const trainingRoute = require('../routes/training');
 
 app.use('/user', userRoute);
+app.use('/training', trainingRoute);
 
 const PORT = process.env.PORT || 3001;
 

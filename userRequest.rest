@@ -2,8 +2,8 @@ POST http://localhost:3000/user/
 Content-Type: application/json
 
 {
-  "login" : "marianek23",
-  "password" : "marianek23",
+  "login" : "marian",
+  "password" : "marian",
   "email" : "email@gamil.com"
 }
 ###
@@ -33,12 +33,12 @@ Content-Type: application/json
 
 {
   "_id" : "610a7baf6e8f5e3184fc0377",
-  "sex" : "female",
-  "weight" : "57",
+  "sex" : "male",
+  "weight" : "76",
   "age" : "23",
-  "height": "160",
+  "height": "171",
    "levelOfActivity" : {
-    "timesPerWeek": "4",
+    "timesPerWeek": "2",
     "tempo": "Moderate" ,
     "trainingType" : "Strength",
     "time": "90"
@@ -54,4 +54,12 @@ Content-Type: application/json
 {
   "_id" : "610a7baf6e8f5e3184fc0377",
   "calories" : "2500"
+}
+
+###
+GET http://localhost:3000/user/info/get
+Content-Type: application/json
+
+{
+  "_id" : "610a7baf6e8f5e3184fc0377"
 }
