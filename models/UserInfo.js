@@ -1,10 +1,3 @@
-// UserInfo:
-// sex  
-//   weight
-//   Age
-//   Height
-//   CalorieNeeds
-//   UserId
 
 const mongoose = require('mongoose');
 
@@ -24,6 +17,7 @@ const UserInfoSchema = mongoose.Schema({
     // in minutes
   },
   calorieNeeds: Number,
+  water: Number,
   friends: [{
     _id: String,
     login: String

@@ -13,6 +13,8 @@ function calculateCalories(req, res, next) {
   const totalCalories = Math.round((BMR + NEAT + (training * time * timesPerWeek / 7)) * 1.1);
 
   req.calorieNeeds = totalCalories;
+  req.water = waterNeeds(weight, time, timesPerWeek);
+
   next();
 }
 
@@ -44,4 +46,9 @@ function aerobicTraining(tempo) {
   }
 }
 
+function waterNeeds(weight, time, timesPerWeek) {
+  const base = weight * 0.03;
+  const exerciseTime = time * timesPerWeek / 7;
+  return Math.round((base + ((exerciseTime / 30) * 0.35)) * 100) / 100;
+}
 exports.calculateCalories = calculateCalories;
