@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const UserInfo = require('../models/UserInfo');
 const bcrypt = require('bcrypt');
+const { calculateCalories } = require('../middleware/calculateCalories');
 // const jwt = require('jsonwebtoken');
 
 router.post('/', async (req, res) => {
@@ -25,24 +26,45 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.post('/info', async (req, res) => {
+router.post('/info', calculateCalories, async (req, res) => {
+  const { _id, sex, weight, age, height, levelOfActivity, friends } = req.body;
+  const calorieNeeds = req.calorieNeeds;
 
-  const { _id, weight, age, height, friends } = req.body;
   try {
     const user = await User.findOne({ _id });
 
     if (user) {
       const userInfo = new UserInfo({
         _id,
+        sex,
         weight,
         age,
         height,
-        BMI: 20,
-        calorieNeeds: 2500,
+        calorieNeeds,
+        levelOfActivity,
         friends
       });
       await userInfo.save();
       res.status(200).json({ message: "Informations were successfully saved" });
+    } else throw Error('User does not exist');
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: err.message });
+  }
+});
+
+router.post('/info/update', calculateCalories, async (req, res) => {
+
+  const { _id, sex, weight, age, height, levelOfActivity, friends } = req.body;
+  const calorieNeeds = req.calorieNeeds;
+
+  try {
+    const user = await User.findOne({ _id });
+
+    if (user) {
+      await UserInfo.updateOne({ _id }, { $set: { sex, weight, age, height, levelOfActivity, calorieNeeds, friends } });
+
+      res.status(200).json({ message: "Informations were successfully updated" });
     } else throw Error('User does not exist');
   } catch (err) {
     console.log(err);

@@ -12,18 +12,39 @@ Content-Type: application/json
 
 {
   "_id" : "610a7baf6e8f5e3184fc0377",
+  "sex" : "male",
   "weight" : "72",
   "age" : "34",
   "height": "178",
+  "levelOfActivity" : {
+    "timesPerWeek": "3",
+    "tempo": "Moderate" ,
+    "trainingType" : "Strength",
+    "time": "45"
+  },
   "friends" : [{
     "_id" : "610a7baf6e8f5e3184fc0379", 
     "login" : "Leon"}]
 }
 
-# {
-#   "_id" : "610a7baf6e8f5e3184fc0377",
-#   "weight" : 72,
-#   "age" : 34,
-#   "height": 175
-#   /*"friends" : [{}, "dzvuh83"]*/
-# }
+###
+POST http://localhost:3000/user/info/update
+Content-Type: application/json
+
+{
+  "_id" : "610a7baf6e8f5e3184fc0377",
+  "sex" : "female",
+  "weight" : "57",
+  "age" : "23",
+  "height": "160",
+   "levelOfActivity" : {
+    "timesPerWeek": "4",
+    "tempo": "Moderate" ,
+    "trainingType" : "Strength",
+    "time": "90"
+  },
+  "friends" : [{
+    "_id" : "610a7baf6e8f5e3184fc0379", 
+    "login" : "Leon"}]
+}
+
