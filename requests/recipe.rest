@@ -1,0 +1,21 @@
+###
+POST http://localhost:3000/recipe
+Content-Type: application/json
+
+{
+ "userId": "610a7baf6e8f5e3184fc0377",
+  "name": "Some Recipe",
+  "calories": "250",
+  "macros": {
+    "protein": "15",
+    "carbs": "25",
+    "fat": "10"
+  },
+  "makingTime": "30",
+  "unit": "min",
+  "ingredients": [
+    "salt", "water", "noodles"
+  ],
+  "description": "boil water, put noodles and boil for 8 min"
+}
+ 

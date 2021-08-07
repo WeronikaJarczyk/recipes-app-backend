@@ -6,8 +6,9 @@ const bcrypt = require('bcrypt');
 const { calculateCalories } = require('../middleware/calculateCalories');
 // const jwt = require('jsonwebtoken');
 
+// register/add new user
 router.post('/', async (req, res) => {
-  const { login, password, email, friends } = req.body;
+  const { login, password, email } = req.body;
   try {
     const ifUser = await User.findOne({ login });
     if (ifUser) throw Error('User already exists');
@@ -26,6 +27,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// add info about existing user
 router.post('/info', calculateCalories, async (req, res) => {
   const { _id, sex, weight, age, height, levelOfActivity, friends } = req.body;
   const calorieNeeds = req.calorieNeeds;
@@ -55,6 +57,7 @@ router.post('/info', calculateCalories, async (req, res) => {
   }
 });
 
+// update info about user
 router.post('/info/update', calculateCalories, async (req, res) => {
 
   const { _id, sex, weight, age, height, levelOfActivity, friends } = req.body;
@@ -75,6 +78,7 @@ router.post('/info/update', calculateCalories, async (req, res) => {
   }
 });
 
+// update info about calories
 router.post('/info/calories', async (req, res) => {
 
   const { _id, calories } = req.body;
@@ -93,6 +97,7 @@ router.post('/info/calories', async (req, res) => {
   }
 });
 
+// get informations about user
 router.get('/info/get', async function (req, res) {
   try {
     const { _id } = req.body;

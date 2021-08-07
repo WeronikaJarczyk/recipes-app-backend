@@ -31,3 +31,13 @@ Content-Type: application/json
 {
   "userId" : "610a7baf6e8f5e3184fc0399"
 }
+
+###
+POST http://localhost:3000/training/delete
+Content-Type: application/json
+
+{
+  "userId" : "610a7baf6e8f5e3184fc0399",
+  "_id" : "610bf92a7604ec375c0b75e0"
+}
+
