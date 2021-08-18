@@ -16,12 +16,11 @@ Content-Type: application/json
   "weight" : "72",
   "age" : "34",
   "height": "178",
-  "levelOfActivity" : {
-    "timesPerWeek": "3",
-    "tempo": "Moderate" ,
-    "trainingType" : "Strength",
-    "time": "45"
-  },
+  "timesPerWeek": "3",
+  "tempo": "Moderate" ,
+  "trainingType" : "Strength",
+  "time": "1.5",
+  "unit": "h",
   "friends" : [{
     "_id" : "610a7baf6e8f5e3184fc0379", 
     "login" : "Leon"}]

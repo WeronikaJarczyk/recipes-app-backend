@@ -4,10 +4,12 @@ const User = require('../models/User');
 const UserInfo = require('../models/UserInfo');
 const bcrypt = require('bcrypt');
 const { calculateCalories } = require('../middleware/calculateCalories');
+const { toMinutes } = require('../middleware/toMinutes');
 // const jwt = require('jsonwebtoken');
 
 // register/add new user
 router.post('/', async (req, res) => {
+  console.log(req);
   const { login, password, email } = req.body;
   try {
     const ifUser = await User.findOne({ login });
@@ -28,10 +30,12 @@ router.post('/', async (req, res) => {
 });
 
 // add info about existing user
-router.post('/info', calculateCalories, async (req, res) => {
-  const { _id, sex, weight, age, height, levelOfActivity, friends } = req.body;
+router.post('/info', toMinutes, calculateCalories, async (req, res) => {
+
+  const { _id, sex, weight, age, height, friends } = req.body;
   const calorieNeeds = req.calorieNeeds;
   const water = req.water;
+  const levelOfActivity = req.levelOfActivity;
 
   try {
     const user = await User.findOne({ _id });
@@ -101,14 +105,14 @@ router.post('/info/calories', async (req, res) => {
 router.get('/info/get', async function (req, res) {
   try {
     const { _id } = req.body;
-    const user = await UserInfo.findOne({ _id });
+    const userInfo = await UserInfo.findOne({ _id });
 
     if (user) {
-      res.status(200).json({ message: user });
+      res.status(200).json({ userInfo });
     } else throw Error('User does not exist');
   } catch (err) {
     console.log(err);
-    res.status(400).json({ userInfo: err.message });
+    res.status(400).json({ message: err.message });
   }
 })
 

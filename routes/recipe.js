@@ -32,10 +32,32 @@ router.post('/', toMinutes, async (req, res) => {
 router.get('/get', async (req, res) => {
   try {
     const { userId } = req.body;
-    const recipes = await Recipe.find({ userId });
-    console.log(recipes);
-  } catch {
 
+    const recipes = await Recipe.find({ userId });
+
+    res.status(200).json({ recipes });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// delete recipe
+router.post('/delete', async (req, res) => {
+  try {
+    const { userId, _id } = req.body;
+
+    await Recipe.deleteOne({
+      $and:
+        [
+          { userId },
+          { _id }
+        ]
+    });
+    res.status(200).json({ message: "Recipe was successfully deleted" });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: err.message });
   }
 });
 

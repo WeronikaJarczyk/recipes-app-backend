@@ -12,10 +12,12 @@ app.use(express.json());
 const userRoute = require('../routes/user');
 const trainingRoute = require('../routes/training');
 const recipeRoute = require('../routes/recipe');
+const dayPlanRoute = require('../routes/dayPlan');
 
 app.use('/user', userRoute);
 app.use('/training', trainingRoute);
 app.use('/recipe', recipeRoute);
+app.use('/plan', dayPlanRoute);
 
 const PORT = process.env.PORT || 3001;
 

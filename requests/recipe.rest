@@ -18,4 +18,21 @@ Content-Type: application/json
   ],
   "description": "boil water, put noodles and boil for 8 min"
 }
+
+###
+GET http://localhost:3000/recipe/get
+Content-Type: application/json
+
+{
+ "userId": "610a7baf6e8f5e3184fc0377"
+}
+ 
+###
+POST http://localhost:3000/recipe/delete
+Content-Type: application/json
+
+{
+ "userId": "610a7baf6e8f5e3184fc0377",
+ "_id" : "610d4dd2d755654da4364fca"
+}
  
