@@ -1,6 +1,6 @@
 function calculateCalories(req, res, next) {
 
-  const { sex, weight, age, height, timesPerWeek, tempo, trainingType, time } = req.body;
+  const { sex, weight, age, height, timesPerWeek, tempo, trainingType, time } = req.body.data;
 
   const sexFactor = (sex === "female") ? -161 : 5;
   // Basal Metabolic Rate
@@ -47,8 +47,11 @@ function aerobicTraining(tempo) {
 }
 
 function waterNeeds(weight, time, timesPerWeek) {
+
   const base = weight * 0.03;
   const exerciseTime = time * timesPerWeek / 7;
+
   return Math.round((base + ((exerciseTime / 30) * 0.35)) * 100) / 100;
 }
+
 exports.calculateCalories = calculateCalories;

@@ -1,7 +1,8 @@
 function toMinutes(req, res, next) {
-  const { unit } = req.body;
-  if (unit === "h") {
-    req.body.time *= 60;
+
+  const { unit } = req.body.data;
+  if (unit === "hour") {
+    req.body.data.time *= 60;
     next();
   } else {
     next();

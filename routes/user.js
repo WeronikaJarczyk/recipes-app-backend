@@ -9,7 +9,6 @@ const { toMinutes } = require('../middleware/toMinutes');
 
 // register/add new user
 router.post('/', async (req, res) => {
-  console.log(req);
   const { login, password, email } = req.body;
   try {
     const ifUser = await User.findOne({ login });
@@ -31,8 +30,9 @@ router.post('/', async (req, res) => {
 
 // add info about existing user
 router.post('/info', toMinutes, calculateCalories, async (req, res) => {
-
-  const { _id, sex, weight, age, height, friends } = req.body;
+  // console.log(req.body);
+  const { _id } = req.body;
+  const { sex, weight, age, height, friends } = req.body.data;
   const calorieNeeds = req.calorieNeeds;
   const water = req.water;
   const levelOfActivity = req.levelOfActivity;
@@ -53,7 +53,7 @@ router.post('/info', toMinutes, calculateCalories, async (req, res) => {
         friends
       });
       await userInfo.save();
-      res.status(200).json({ message: "Informations were successfully saved" });
+      res.status(200).json({ message: "Informations were successfully saved", calorieNeeds });
     } else throw Error('User does not exist');
   } catch (err) {
     console.log(err);
@@ -84,7 +84,7 @@ router.post('/info/update', calculateCalories, async (req, res) => {
 
 // update info about calories
 router.post('/info/calories', async (req, res) => {
-
+  console.log(req.body);
   const { _id, calories } = req.body;
 
   try {
