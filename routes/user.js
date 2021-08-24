@@ -104,7 +104,7 @@ router.post('/info', toMinutes, calculateCalories, async (req, res) => {
 
 // update info about calories
 router.post('/info/calories', async (req, res) => {
-  console.log(req.body);
+
   const { _id, calories } = req.body;
 
   try {
@@ -122,12 +122,13 @@ router.post('/info/calories', async (req, res) => {
 });
 
 // get informations about user
-router.get('/info/get', async function (req, res) {
+router.post('/info/get', async function (req, res) {
   try {
     const { _id } = req.body;
+
     const userInfo = await UserInfo.findOne({ _id });
 
-    if (user) {
+    if (userInfo) {
       res.status(200).json({ userInfo });
     } else throw Error('User does not exist');
   } catch (err) {
