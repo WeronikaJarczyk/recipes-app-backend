@@ -13,8 +13,9 @@ const UserInfoSchema = mongoose.Schema({
     // tempo: No exercise, Light, Moderate, Intense
     trainingType: String,
     // type: strength, aerobic
-    time: Number
+    time: Number,
     // in minutes
+    unit: String
   },
   calorieNeeds: Number,
   water: Number,

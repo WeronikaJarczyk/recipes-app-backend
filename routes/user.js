@@ -30,6 +30,7 @@ router.post('/', async (req, res) => {
 
 // add info about existing user
 router.post('/info', toMinutes, calculateCalories, async (req, res) => {
+
   try {
     const { _id } = req.body;
     const { sex, weight, age, height, friends } = req.body.data;
@@ -44,7 +45,6 @@ router.post('/info', toMinutes, calculateCalories, async (req, res) => {
       throw Error('User does not exist');
 
     if (userInfoExisting) {
-
       await UserInfo.updateOne({ _id },
         {
           $set:
