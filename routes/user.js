@@ -30,17 +30,37 @@ router.post('/', async (req, res) => {
 
 // add info about existing user
 router.post('/info', toMinutes, calculateCalories, async (req, res) => {
-  // console.log(req.body);
-  const { _id } = req.body;
-  const { sex, weight, age, height, friends } = req.body.data;
-  const calorieNeeds = req.calorieNeeds;
-  const water = req.water;
-  const levelOfActivity = req.levelOfActivity;
-
   try {
-    const user = await User.findOne({ _id });
+    const { _id } = req.body;
+    const { sex, weight, age, height, friends } = req.body.data;
+    const calorieNeeds = req.calorieNeeds;
+    const water = req.water;
+    const levelOfActivity = req.levelOfActivity;
 
-    if (user) {
+    const user = await User.findOne({ _id });
+    const userInfoExisting = await UserInfo.findOne({ _id });
+
+    if (!user)
+      throw Error('User does not exist');
+
+    if (userInfoExisting) {
+
+      await UserInfo.updateOne({ _id },
+        {
+          $set:
+          {
+            sex,
+            weight,
+            age,
+            height,
+            levelOfActivity,
+            calorieNeeds,
+            water,
+            friends
+          }
+        });
+      res.status(200).json({ message: "Informations were successfully updated", calorieNeeds });
+    } else {
       const userInfo = new UserInfo({
         _id,
         sex,
@@ -54,7 +74,7 @@ router.post('/info', toMinutes, calculateCalories, async (req, res) => {
       });
       await userInfo.save();
       res.status(200).json({ message: "Informations were successfully saved", calorieNeeds });
-    } else throw Error('User does not exist');
+    }
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: err.message });
@@ -62,25 +82,25 @@ router.post('/info', toMinutes, calculateCalories, async (req, res) => {
 });
 
 // update info about user
-router.post('/info/update', calculateCalories, async (req, res) => {
+// router.post('/info/update', calculateCalories, async (req, res) => {
 
-  const { _id, sex, weight, age, height, levelOfActivity, friends } = req.body;
-  const calorieNeeds = req.calorieNeeds;
-  const water = req.water;
+//   const { _id, sex, weight, age, height, levelOfActivity, friends } = req.body;
+//   const calorieNeeds = req.calorieNeeds;
+//   const water = req.water;
 
-  try {
-    const user = await User.findOne({ _id });
+//   try {
+//     const user = await User.findOne({ _id });
 
-    if (user) {
-      await UserInfo.updateOne({ _id }, { $set: { sex, weight, age, height, levelOfActivity, calorieNeeds, water, friends } });
+//     if (user) {
+//       await UserInfo.updateOne({ _id }, { $set: { sex, weight, age, height, levelOfActivity, calorieNeeds, water, friends } });
 
-      res.status(200).json({ message: "Informations were successfully updated" });
-    } else throw Error('User does not exist');
-  } catch (err) {
-    console.log(err);
-    res.status(400).json({ message: err.message });
-  }
-});
+//       res.status(200).json({ message: "Informations were successfully updated" });
+//     } else throw Error('User does not exist');
+//   } catch (err) {
+//     console.log(err);
+//     res.status(400).json({ message: err.message });
+//   }
+// });
 
 // update info about calories
 router.post('/info/calories', async (req, res) => {
